@@ -88,7 +88,7 @@ const Navbar = () => {
                 <div
                   tabIndex={0}
                   role="button"
-                  className="btn btn-ghost lg:hidden"
+                  className="bg-[#ffffff] btn btn-ghost lg:hidden"
                 >
                   <GiHamburgerMenu />
                 </div>

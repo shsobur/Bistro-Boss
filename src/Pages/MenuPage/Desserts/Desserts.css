@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap'); /* Cinzel font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap'); /* Inter font */
+
+
+
+.dessert_main_container {
+  height: 90vh;
+  width: 100%;
+  background-image: url("https://i.postimg.cc/qB9SR6k2/dessert-bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.dessert_inner_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  color: #ffffff;
+}
+
+.dessert_text_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60%;
+  width: 80%;
+  text-align: center;
+  background-color: #1515159e;
+}
+
+.dessert_text_container h2 {
+  font-family: "Cinzel", serif;
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+.dessert_text_container p {
+  padding: 0 100px 0 100px;
+  font-family: "Inter", serif;
+  font-size: 1rem;
+  font-weight: 400;
+}

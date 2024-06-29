@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap'); /* Cinzel font */
+
+
+
+.menu_main_container {
+  height: 80vh;
+  width: 100%;
+  border: 2px solid purple;
+  background-image: url("https://i.postimg.cc/6qZL739Q/banner3.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.menu_inner_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  color: #ffffff;
+}
+
+.menu_text_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60%;
+  width: 80%;
+  font-family: "Cinzel", serif;  
+  text-align: center;
+  background-color: #15151578;
+}
+
+.menu_text_container h2 {
+  font-size: 5rem;
+  font-weight: 700;
+}
+
+.menu_text_container p {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
