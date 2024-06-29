@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap'); /* Cinzel Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap'); /* Inter Font */
+
+
+.section_heading_one {
+  padding-top: 130px;
+}
+
+.section_heading_one p {
+  font-family: "Inter", sans-serif;
+  color: #D99904;
+  font-size: 1.1rem;
+}
+
+.section_heading_two {
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+.section_heading_two span{
+  font-family: "Inter", sans-serif;
+  border-top: 4px solid #80808033;
+  border-bottom: 4px solid #80808033;
+  padding: 20px 0;
+  font-size: 2.4rem;
+  font-weight: 400;
+}
+
+
+.slider_img_name {
+  position: relative;
+}
+
+.slider_img_name h1 {
+  font-family: "Cinzel", serif;
+  font-size: 2rem;
+  text-align: center;
+  padding-right: 70px;
+  padding-bottom: 30px;
+  position: absolute;
+  bottom: 20px;
+  left: 70px;
+  color: #ffffff;
+  text-shadow: 3px 2px #0d143b;
+  font-weight: 500;
+}
