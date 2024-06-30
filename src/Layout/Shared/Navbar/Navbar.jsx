@@ -63,7 +63,7 @@ const Navbar = () => {
 
       <li>
         <NavLink
-          to="/shop"
+          to="/ourshop"
           className={({ isActive }) =>
             isActive
               ? "text-[#EEFF25] font-extrabold"

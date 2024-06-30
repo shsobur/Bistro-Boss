@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Helmet } from "react-helmet-async";
-import MenuPageHeader from "./MenuPageHeader/MenuPageHeader";
+import MenuPageBaner from "./MenuPageBaner/MenuPageBaner";
 import useMenu from "../../Hook/Hook";
 import TodayOffer from "./TodayOffer/TodayOffer";
 import Desserts from "./Desserts/Desserts";
@@ -15,13 +15,11 @@ import SoupMenu from "./SoupMenu/SoupMenu";
 const MenuPageLayout = () => {
   const [menu] = useMenu();
 
-  const offered = menu.filter(item => item.category === "offered");
-  const dessert = menu.filter(item => item.category === "dessert");
-  const pizza = menu.filter(item => item.category === "pizza");
-  const salad = menu.filter(item => item.category === "salad");
-  const soup = menu.filter(item => item.category === "soup");
-
-  console.log(salad);
+  const offered = menu.filter((item) => item.category === "offered");
+  const dessert = menu.filter((item) => item.category === "dessert");
+  const pizza = menu.filter((item) => item.category === "pizza");
+  const salad = menu.filter((item) => item.category === "salad");
+  const soup = menu.filter((item) => item.category === "soup");
 
   return (
     <div>
@@ -29,7 +27,7 @@ const MenuPageLayout = () => {
         <title>Bostro Boss Restaurant | Menu</title>
       </Helmet>
 
-      <MenuPageHeader></MenuPageHeader>
+      <MenuPageBaner></MenuPageBaner>
       <TodayOffer items={offered}></TodayOffer>
 
       <Desserts></Desserts>

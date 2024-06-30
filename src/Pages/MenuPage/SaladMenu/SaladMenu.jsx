@@ -13,7 +13,7 @@ const SaladMenu = ({items}) => {
       </div>
 
       <div className="mt-12 mb-24 flex items-center justify-center">
-        <Link to="">
+        <Link to="/ourshop">
           <button
             className="border-b-black
         border-b-4

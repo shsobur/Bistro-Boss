@@ -23,6 +23,7 @@ const Review = () => {
   return (
     <div>
       <div>
+
         <div className="text-center">
           <div className="section_heading_one">
             <p>
@@ -34,6 +35,7 @@ const Review = () => {
             <span>TESTIMONIALS</span>
           </div>
         </div>
+
       </div>
 
       <div>
