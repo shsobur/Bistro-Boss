@@ -7,10 +7,13 @@ import Featured from "./Featured/Featured";
 import FoodCart from "./FoodCart/FoodCart";
 import OurMenu from "./OurMenu/OurMenu";
 import Review from "./Review/Review";
+import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
 
 const HomePageLayout = () => {
   return (
     <div>
+      <ScrollToTop></ScrollToTop>
+
       <Helmet>
         <title>Bostro Boss Restaurant | Home</title>
       </Helmet>

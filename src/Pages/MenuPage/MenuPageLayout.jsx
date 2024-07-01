@@ -11,6 +11,7 @@ import Salad from "./Salad/Salad";
 import SaladMenu from "./SaladMenu/SaladMenu";
 import Soup from "./Soup/Soup";
 import SoupMenu from "./SoupMenu/SoupMenu";
+import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
 
 const MenuPageLayout = () => {
   const [menu] = useMenu();
@@ -23,6 +24,9 @@ const MenuPageLayout = () => {
 
   return (
     <div>
+
+      <ScrollToTop></ScrollToTop>
+
       <Helmet>
         <title>Bostro Boss Restaurant | Menu</title>
       </Helmet>

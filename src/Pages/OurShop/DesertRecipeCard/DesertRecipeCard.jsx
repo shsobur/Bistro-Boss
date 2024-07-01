@@ -5,7 +5,7 @@ const DesertRecipeCard = () => {
   const [desserts, setDesserts] = useState([]);
 
   useEffect(() => {
-    fetch("/public/menu.json")
+    fetch("http://localhost:5000/menu")
     .then(res => res.json())
     .then(data => {
       const dessert = data.filter(item => item.category === "dessert");

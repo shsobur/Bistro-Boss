@@ -5,7 +5,7 @@ const FoodOrder = () => {
   const [tabIndex, setTabIndex] = useState(0);
 
   return (
-    <div  className="mt-40">
+    <div  className="mt-10">
 
       <div className="flex gap-5 items-center -mx-4 space-x-2 overflow-x-auto overflow-y-hidden sm:justify-center flex-nowrap">
 
