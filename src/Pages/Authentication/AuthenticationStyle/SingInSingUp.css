@@ -84,6 +84,19 @@
   background-color: #d1a054;
 }
 
+.form_sub_disabled_btn input {
+  width: 100%;
+  text-align: center;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: "Inter", serif;
+  color: #b4b4b4;
+  background-color: #a0835a;
+  cursor: not-allowed;
+}
+
 .form_navigation_container {
   width: 100%;
   text-align: center;

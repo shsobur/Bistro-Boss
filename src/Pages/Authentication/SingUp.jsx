@@ -9,6 +9,17 @@ import { GrFacebookOption } from "react-icons/gr";
 import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
 
 const SingUp = () => {
+  const handleSingUp = (event) => {
+    event.preventDefault();
+
+    const form = event.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    console.log (name, email, password);
+  }
+
   return (
     <div className="main_authentication_container">
     <ScrollToTop></ScrollToTop>
@@ -19,7 +30,7 @@ const SingUp = () => {
 
           <div className="main_form_container">
 
-            <form>
+            <form onSubmit={handleSingUp}>
               <div className="form_title">
                 <h2>Sing Up</h2>
               </div>
@@ -31,17 +42,17 @@ const SingUp = () => {
                     type="text"
                     name="name"
                     placeholder="Type hear"
-                    id=""
+                    id="111"
                   />
                 </div>
 
                 <div className="form_inpur_container">
                   <p>Email</p>
                   <input
-                    type="text"
+                    type="email"
                     name="email"
                     placeholder="Type hear"
-                    id=""
+                    id="112"
                   />
                 </div>
 
@@ -51,7 +62,7 @@ const SingUp = () => {
                     type="password"
                     name="password"
                     placeholder="Enter your password"
-                    id=""
+                    id="113"
                   />
                 </div>
               </div>

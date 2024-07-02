@@ -1,5 +1,6 @@
 import "../Authentication/AuthenticationStyle/SingInSingUp.css";
 import suthImage from "../../assets/others/authentication2.png";
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 
 // React icon
 import { SiGoogle } from "react-icons/si";
@@ -7,8 +8,54 @@ import { FiGithub } from "react-icons/fi";
 import { GrFacebookOption } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
+import { useEffect, useRef, useState } from "react";
+import Swal from "sweetalert2";
 
 const SingIn = () => {
+  const captchaRef = useRef(null);
+  const [disabled, setDisabled] = useState(true);
+
+  useEffect (() => {
+    loadCaptchaEnginge(6); 
+  }, [])
+
+  const handleValidateCaptch = () => {
+    const user_captcha_value = captchaRef.current.value;
+    console.log (user_captcha_value);
+
+    if (validateCaptcha(user_captcha_value, false) === true) {
+      setDisabled(false);
+
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-right",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Captcha match successfully"
+      });
+    }else{
+      setDisabled(true);
+    }
+  }
+
+  const handleSingIn = (event) => {
+    event.preventDefault();
+
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    console.log(email, password);
+  }
+
   return (
     <div className="main_authentication_container">
       <ScrollToTop></ScrollToTop>
@@ -19,19 +66,20 @@ const SingIn = () => {
 
           <div className="main_form_container">
 
-            <form>
+            <form onSubmit={handleSingIn}>
               <div className="form_title">
                 <h2>Login</h2>
               </div>
 
               <div>
+
                 <div className="form_inpur_container">
-                  <p>Name</p>
+                  <p>Email</p>
                   <input
                     type="text"
-                    name="name"
+                    name="email"
                     placeholder="Type hear"
-                    id=""
+                    id="105"
                   />
                 </div>
 
@@ -41,14 +89,30 @@ const SingIn = () => {
                     type="password"
                     name="password"
                     placeholder="Enter your password"
-                    id=""
+                    id="106"
                   />
                 </div>
+
+                <div>
+                <LoadCanvasTemplate />
+                </div>
+
+                <div className="form_inpur_container">
+                  <input
+                    onChange={handleValidateCaptch}
+                    ref={captchaRef}
+                    type="text"
+                    name="captcha"
+                    placeholder="Type captcha hear"
+                    id="107"
+                  />
+                </div>
+
               </div>
 
-              <div className="form_sub_btn">
+              <div className={disabled ? "form_sub_disabled_btn" : "form_sub_btn"}>
                 <label htmlFor="102">
-                  <input type="submit" value="Sing In" id="102" />
+                  <input disabled={disabled} type="submit" value="Sing In" id="102" />
                 </label>
               </div>
 
