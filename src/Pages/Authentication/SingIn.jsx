@@ -6,15 +6,20 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-s
 import { SiGoogle } from "react-icons/si";
 import { FiGithub } from "react-icons/fi";
 import { GrFacebookOption } from "react-icons/gr";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const SingIn = () => {
-  const captchaRef = useRef(null);
-  const [disabled, setDisabled] = useState(true);
+  const { singInUser } = useContext(AuthContext);
 
+  const [disabled, setDisabled] = useState(true);
+  const captchaRef = useRef(null);
+  const navigate = useNavigate();
+  
   useEffect (() => {
     loadCaptchaEnginge(6); 
   }, [])
@@ -54,10 +59,41 @@ const SingIn = () => {
     const password = form.password.value;
 
     console.log(email, password);
+
+    singInUser(email, password)
+    .then(result => {
+      const singInUser = result.user;
+      console.log (singInUser);
+
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Signed up successfully"
+      });
+      form.reset();
+      navigate("/");
+    })
+    .catch(error => {
+      setDisabled(true);
+      console.error(error.message);
+    })
   }
 
   return (
     <div className="main_authentication_container">
+      <Helmet>
+        <title>Bistro Boss | Sing Up</title>
+      </Helmet>
       <ScrollToTop></ScrollToTop>
 
       <div className="inner_authentication_container">
