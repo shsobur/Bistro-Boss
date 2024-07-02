@@ -1,13 +1,17 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Footer from "../Shared/Footer/Footer";
 import Navbar from "../Shared/Navbar/Navbar";
 
 const Main = () => {
+  const location = useLocation();
+  const noNavAndFooterInSingIn = location.pathname.includes("singin");
+  const noNavAndFooterInSingUp = location.pathname.includes("singup");
+
   return (
     <div>
-      <Navbar></Navbar>
+      {noNavAndFooterInSingIn || noNavAndFooterInSingUp || <Navbar></Navbar>}
       <Outlet></Outlet>
-      <Footer></Footer>
+      {noNavAndFooterInSingIn || noNavAndFooterInSingUp || <Footer></Footer>}
     </div>
   );
 };

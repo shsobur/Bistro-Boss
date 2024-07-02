@@ -8,6 +8,8 @@ import PizzaRecipeCard from "../Pages/OurShop/PizzaRecipeCard/PizzaRecipeCard";
 import SoupReceipeCart from "../Pages/OurShop/SoupReceipeCart/SoupReceipeCart";
 import DesertRecipeCard from "../Pages/OurShop/DesertRecipeCard/DesertRecipeCard";
 import DrinkRecipeCard from "../Pages/OurShop/DrinkRecipeCard/DrinkRecipeCard";
+import SingIn from "../Pages/Authentication/SingIn";
+import SingUp from "../Pages/Authentication/SingUp";
 
 export const router = createBrowserRouter([
   {
@@ -18,10 +20,12 @@ export const router = createBrowserRouter([
         path: "/",
         element: <HomePageLayout></HomePageLayout>,
       },
+
       {
         path: "/menu",
         element: <MenuPageLayout></MenuPageLayout>,
       },
+
       {
         path: "/ourshop",
         element: <OurShopPageLayout></OurShopPageLayout>,
@@ -47,6 +51,16 @@ export const router = createBrowserRouter([
             element: <DrinkRecipeCard></DrinkRecipeCard>,
           }
         ]
+      },
+
+      {
+        path: "/singin",
+        element: <SingIn></SingIn>,
+      },
+
+      {
+        path: "/singup",
+        element: <SingUp></SingUp>,
       }
     ],
   },

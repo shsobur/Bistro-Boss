@@ -115,7 +115,7 @@ const Navbar = () => {
 
             <div className="navbar-end">
               <div className="font-extrabold text-[#ffffff]">
-                <Link to="/login">SING IN</Link>
+                <Link to="/singin">SING IN</Link>
               </div>
               <div className="text-5xl text-[#ffffff] ml-5"><IoMdContact /></div>
             </div>
