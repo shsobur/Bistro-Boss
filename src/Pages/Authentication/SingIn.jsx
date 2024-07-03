@@ -6,7 +6,7 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-s
 import { SiGoogle } from "react-icons/si";
 import { FiGithub } from "react-icons/fi";
 import { GrFacebookOption } from "react-icons/gr";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
 import { useContext, useEffect, useRef, useState } from "react";
 import Swal from "sweetalert2";
@@ -14,12 +14,15 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { Helmet } from "react-helmet-async";
 
 const SingIn = () => {
-  const { singInUser } = useContext(AuthContext);
+  const { singInUser, googleSingUp } = useContext(AuthContext);
 
   const [disabled, setDisabled] = useState(true);
   const captchaRef = useRef(null);
   const navigate = useNavigate();
-  
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
   useEffect (() => {
     loadCaptchaEnginge(6); 
   }, [])
@@ -80,12 +83,24 @@ const SingIn = () => {
         icon: "success",
         title: "Signed up successfully"
       });
-      form.reset();
-      navigate("/");
+
+      navigate(from, {replace: true});
     })
     .catch(error => {
       setDisabled(true);
       console.error(error.message);
+    })
+  }
+
+  const handelGooglSingIn = () => {
+    googleSingUp()
+    .then(result => {
+      const googleSingInUser = result.user;
+      console.log(googleSingInUser);
+      navigate(from, {replace: true});
+    })
+    .catch(error => {
+      console.log(error);
     })
   }
 
@@ -162,7 +177,9 @@ const SingIn = () => {
                 <h4>Or sign up with</h4>
 
                 <div className="form_icon_container">
-                  <SiGoogle />
+                  <div onClick={handelGooglSingIn}>
+                    <SiGoogle />
+                  </div>
                   <FiGithub />
                   <GrFacebookOption />
                 </div>

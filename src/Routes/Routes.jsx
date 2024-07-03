@@ -10,6 +10,8 @@ import DesertRecipeCard from "../Pages/OurShop/DesertRecipeCard/DesertRecipeCard
 import DrinkRecipeCard from "../Pages/OurShop/DrinkRecipeCard/DrinkRecipeCard";
 import SingIn from "../Pages/Authentication/SingIn";
 import SingUp from "../Pages/Authentication/SingUp";
+import DashboardPageLayout from "../Pages/Dashboard/DashboardPageLayout";
+import PrivetRoute from "./PrivetRoute";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +21,11 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePageLayout></HomePageLayout>,
+      },
+
+      {
+        path: "/dashboard",
+        element: <PrivetRoute><DashboardPageLayout></DashboardPageLayout></PrivetRoute>
       },
 
       {

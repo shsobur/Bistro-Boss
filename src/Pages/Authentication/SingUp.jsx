@@ -1,19 +1,26 @@
 import "../Authentication/AuthenticationStyle/SingInSingUp.css";
 import suthImage from "../../assets/others/authentication2.png";
-import { Link } from "react-router-dom";
+import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
+
+import Swal from "sweetalert2";
+import { useContext } from "react";
+import { useForm } from "react-hook-form";
+import { Helmet } from "react-helmet-async";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 // React icon
 import { SiGoogle } from "react-icons/si";
 import { FiGithub } from "react-icons/fi";
 import { GrFacebookOption } from "react-icons/gr";
-import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
-import { useContext } from "react";
-import { AuthContext } from "../../AuthProvider/AuthProvider";
-import { useForm } from "react-hook-form";
-import { Helmet } from "react-helmet-async";
 
 const SingUp = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, googleSingUp } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
   const {
     register,
     handleSubmit,
@@ -21,8 +28,45 @@ const SingUp = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log (data);
+    const email = data.email;
+    const password = data.password;
+
+    createUser(email, password)
+    .then(result => {
+      const singUpUser = result.user
+      console.log (singUpUser);
+      
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Signed Up successfully"
+      });
+
+      navigate(from, {replace: true});
+    })
   };
+
+  const handeGoogleSingUp = () => {
+    googleSingUp()
+    .then(result => {
+      const googleSingUpUser = result.user;
+      console.log(googleSingUpUser);
+      navigate(from, {replace: true});
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  }
 
   return (
     <div className="main_authentication_container">
@@ -47,7 +91,23 @@ const SingUp = () => {
                     name="name"
                     placeholder="Type hear"
                     {...register("name", { required: true })}
-                    id="111"
+                  />
+                  <div>
+                    {errors.name && (
+                      <span className="text-red-500 font-medium">
+                        Name is required
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div className="form_inpur_container">
+                  <p>Photo URL</p>
+                  <input
+                    type="text"
+                    name="photo"
+                    placeholder="Photo URL"
+                    {...register("photo", { required: true })}
                   />
                   <div>
                     {errors.name && (
@@ -65,7 +125,6 @@ const SingUp = () => {
                     name="email"
                     placeholder="Type hear"
                     {...register("email", { required: true })}
-                    id="112"
                   />
                   <div>
                     {errors.email && (
@@ -87,7 +146,6 @@ const SingUp = () => {
                       { required: true, minLength: 6, maxLength: 20 },
                       { required: true }
                     )}
-                    id="113"
                   />
                   <div>
                     {errors.password?.type === "required" && (
@@ -127,7 +185,9 @@ const SingUp = () => {
                 <h4>Or sign up with</h4>
 
                 <div className="form_icon_container">
-                  <SiGoogle />
+                  <div onClick={handeGoogleSingUp}>
+                    <SiGoogle />
+                  </div>
                   <FiGithub />
                   <GrFacebookOption />
                 </div>

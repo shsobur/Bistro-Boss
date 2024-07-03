@@ -5,8 +5,35 @@ import { GiHamburgerMenu } from "react-icons/gi";
 // CSS file
 import "../Navbar/Navbar.css";
 import { Link, NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handelSingOut = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You went to Logout",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, LogOut!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logOut().then(() => {
+          Swal.fire({
+            title: "LogOut",
+            text: "LogOut successfully",
+            icon: "success",
+          });
+        });
+      }
+    });
+  };
+
   const navOpsion = (
     <>
       <li>
@@ -79,10 +106,8 @@ const Navbar = () => {
   return (
     <header>
       <nav>
-
         <div>
           <div className="navbar max-w-screen-xl fixed z-10 bg-[#151515] bg-opacity-30">
-
             <div className="navbar-start">
               <div className="dropdown">
                 <div
@@ -106,7 +131,6 @@ const Navbar = () => {
                   <h3>Restaurant</h3>
                 </div>
               </Link>
-
             </div>
 
             <div className="navbar-center hidden lg:flex">
@@ -114,15 +138,32 @@ const Navbar = () => {
             </div>
 
             <div className="navbar-end">
-              <div className="font-extrabold text-[#ffffff]">
-                <Link to="/singin">SING IN</Link>
+              <div>
+                {user ? (
+                  <div className="font-extrabold text-[#ffffff]">
+                    <button onClick={handelSingOut}>SING OUT</button>
+                  </div>
+                ) : (
+                  <div className="font-extrabold text-[#ffffff]">
+                    <Link to="/singin">SING IN</Link>
+                  </div>
+                )}
               </div>
-              <div className="text-5xl text-[#ffffff] ml-5"><IoMdContact /></div>
-            </div>
 
+              <div className="flex flex-col items-center justify-center pl-10">
+                <div className="text-5xl text-[#ffffff] ml-5">
+                  <IoMdContact />
+                </div>
+                <div>
+                  {
+                    user ? <span className="text-[#ffffff]">{user?.email}</span> : <span></span>
+                  }
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
-
       </nav>
     </header>
   );
