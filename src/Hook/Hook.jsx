@@ -4,13 +4,13 @@ const useMenu = () => {
   const [menu, setMenu] = useState([]);
   const [loding, setLoding] = useState(true);
 
-  useEffect (() => {
+  useEffect(() => {
     fetch("http://localhost:5000/menu")
-    .then(res => res.json())
-    .then(data => {
-      setMenu(data);
-      setLoding(false);
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        setMenu(data);
+        setLoding(true);
+      });
   }, []);
 
   return [menu, loding];

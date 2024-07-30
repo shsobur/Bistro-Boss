@@ -1,6 +1,7 @@
 // React icons
 import { IoMdContact } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { TiShoppingCart } from "react-icons/ti";
 
 // CSS file
 import "../Navbar/Navbar.css";
@@ -8,9 +9,12 @@ import { Link, NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import useCart from "../../../Hook/useCart";
+
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [cart] = useCart();
 
   const handelSingOut = () => {
     Swal.fire({
@@ -100,6 +104,15 @@ const Navbar = () => {
           <a>OUR SHOP</a>
         </NavLink>
       </li>
+
+      <li>
+        <button className="btn bg-[#00000078]">
+          <div className="text-3xl text-[#2daa2d]">
+            <TiShoppingCart />
+          </div>
+          <div className="badge bg-[#00f700] text-[#ffffff]">+{cart.length}</div>
+        </button>
+      </li>
     </>
   );
 
@@ -155,12 +168,13 @@ const Navbar = () => {
                   <IoMdContact />
                 </div>
                 <div>
-                  {
-                    user ? <span className="text-[#ffffff]">{user?.email}</span> : <span></span>
-                  }
+                  {user ? (
+                    <span className="text-[#ffffff]">{user?.email}</span>
+                  ) : (
+                    <span></span>
+                  )}
                 </div>
               </div>
-
             </div>
           </div>
         </div>

@@ -17,6 +17,7 @@ const SingIn = () => {
   const { singInUser, googleSingUp } = useContext(AuthContext);
 
   const [disabled, setDisabled] = useState(true);
+  const [error, setError] = useState(null);
   const captchaRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -47,7 +48,7 @@ const SingIn = () => {
       });
       Toast.fire({
         icon: "success",
-        title: "Captcha match successfully"
+        title: "Captcha matched"
       });
     }else{
       setDisabled(true);
@@ -89,6 +90,7 @@ const SingIn = () => {
     .catch(error => {
       setDisabled(true);
       console.error(error.message);
+      setError("invalid! username or password, please try again");
     })
   }
 
@@ -166,6 +168,7 @@ const SingIn = () => {
                   <input disabled={disabled} type="submit" value="Sing In" id="102" />
                 </label>
               </div>
+              <div><span className="mt-2 text-red-600">{error}</span></div>
 
               <div className="form_navigation_container">
                 <h3>
